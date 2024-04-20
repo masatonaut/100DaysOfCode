@@ -1,0 +1,25 @@
+# macOS system files
+.DS_Store
+
+# Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Files typically not included in version control
+*.log
+*.csv
+*.dat
+.env
+*.db
+
+# Virtual environments
+venv/
+env/
+
+# Packaging
+*.egg-info/
+dist/
+
+# IDE settings
+.idea/
+.vscode/
