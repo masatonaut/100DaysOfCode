@@ -10,7 +10,7 @@ end_of_game = False
 lives = 6
 
 print(logo)
-print(f'Pssst, the solution is {chosen_word}.')
+print(f"Pssst, the solution is {chosen_word}.")
 
 display = []
 for _ in range(word_length):
@@ -27,7 +27,7 @@ while not end_of_game:
 
         if letter == guess:
             display[position] = letter
-    
+
     if guess not in chosen_word:
         print(f"You guessed {guess}, that's not in the word. You lose a life.")
 

@@ -6,6 +6,7 @@ print(logo)
 bids = {}
 bidding_finished = False
 
+
 def find_highest_bidder(bidding_record):
     highest_bid = 0
     winner = ""
@@ -26,5 +27,4 @@ while not bidding_finished:
         bidding_finished = True
         find_highest_bidder(bids)
     elif should_continue == "yes":
-        os.system('clear')
-
+        os.system("clear")
