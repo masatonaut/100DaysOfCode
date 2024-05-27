@@ -9,7 +9,7 @@ screen.title("My Snake Game")
 screen.tracer(0)
 
 snake = Snake()
-food = Food()
+# food = Food()
 
 screen.listen()
 screen.onkey(snake.up, "Up")
@@ -23,6 +23,5 @@ while game_is_on:
     time.sleep(0.1)
 
     snake.move()
-
 
 screen.exitonclick()
