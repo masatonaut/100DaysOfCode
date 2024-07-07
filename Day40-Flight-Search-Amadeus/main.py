@@ -88,7 +88,3 @@ for destination in sheet_data:
 
         # Send emails to everyone on the list
         notification_manager.send_emails(email_list=customer_email_list, email_body=message)
-
-
-
-
