@@ -5,8 +5,8 @@ from twilio.rest import Client
 
 # Using a .env file to retrieve the phone numbers and tokens.
 
-class NotificationManager:
 
+class NotificationManager:
     def __init__(self):
         # Retrieve environment variables only once
         self.smtp_address = os.environ["EMAIL_PROVIDER_SMTP_ADDRESS"]
@@ -16,7 +16,7 @@ class NotificationManager:
         self.twilio_verified_number = os.environ["TWILIO_VERIFIED_NUMBER"]
         self.whatsapp_number = os.environ["TWILIO_WHATSAPP_NUMBER"]
         # Set up Twilio Client and SMTP connection
-        self.client = Client(os.environ['TWILIO_SID'], os.environ["TWILIO_AUTH_TOKEN"])
+        self.client = Client(os.environ["TWILIO_SID"], os.environ["TWILIO_AUTH_TOKEN"])
         self.connection = smtplib.SMTP(os.environ["EMAIL_PROVIDER_SMTP_ADDRESS"])
 
     def send_sms(self, message_body):
@@ -44,7 +44,7 @@ class NotificationManager:
         message = self.client.messages.create(
             from_=self.twilio_virtual_number,
             body=message_body,
-            to=self.twilio_verified_number
+            to=self.twilio_verified_number,
         )
         # Prints if successfully sent.
         print(message.sid)
@@ -53,9 +53,9 @@ class NotificationManager:
     # https://console.twilio.com/us1/develop/sms/try-it-out/whatsapp-learn
     def send_whatsapp(self, message_body):
         message = self.client.messages.create(
-            from_=f'whatsapp:{self.whatsapp_number}',
+            from_=f"whatsapp:{self.whatsapp_number}",
             body=message_body,
-            to=f'whatsapp:{self.twilio_verified_number}'
+            to=f"whatsapp:{self.twilio_verified_number}",
         )
         print(message.sid)
 
@@ -67,5 +67,7 @@ class NotificationManager:
                 self.connection.sendmail(
                     from_addr=self.email,
                     to_addrs=email,
-                    msg=f"Subject:New Low Price Flight!\n\n{email_body}".encode('utf-8')
+                    msg=f"Subject:New Low Price Flight!\n\n{email_body}".encode(
+                        "utf-8"
+                    ),
                 )

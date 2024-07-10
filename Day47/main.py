@@ -14,5 +14,5 @@ if price_as_float < BUY_PRICE:
         connection.sendmail(
             from_addr=YOUR_EMAIL,
             to_addrs=YOUR_EMAIL,
-            msg=f"Subject:Amazon Price Alert!\n\n{message}\n{url}".encode("utf-8")
+            msg=f"Subject:Amazon Price Alert!\n\n{message}\n{url}".encode("utf-8"),
         )

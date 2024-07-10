@@ -10,8 +10,8 @@ IATA_ENDPOINT = "https://test.api.amadeus.com/v1/reference-data/locations/cities
 FLIGHT_ENDPOINT = "https://test.api.amadeus.com/v2/shopping/flight-offers"
 TOKEN_ENDPOINT = "https://test.api.amadeus.com/v1/security/oauth2/token"
 
-class FlightSearch:
 
+class FlightSearch:
     def __init__(self):
         """
         Initialize an instance of the FlightSearch class.
@@ -42,20 +42,18 @@ class FlightSearch:
             str: The new access token obtained from the API response.
         """
         # Header with content type as per Amadeus documentation
-        header = {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        header = {"Content-Type": "application/x-www-form-urlencoded"}
         body = {
-            'grant_type': 'client_credentials',
-            'client_id': self._api_key,
-            'client_secret': self._api_secret
+            "grant_type": "client_credentials",
+            "client_id": self._api_key,
+            "client_secret": self._api_secret,
         }
         response = requests.post(url=TOKEN_ENDPOINT, headers=header, data=body)
 
         # New bearer token. Typically expires in 1799 seconds (30min)
         print(f"Your token is {response.json()['access_token']}")
         print(f"Your token expires in {response.json()['expires_in']} seconds")
-        return response.json()['access_token']
+        return response.json()["access_token"]
 
     def get_destination_code(self, city_name):
         """
@@ -87,14 +85,10 @@ class FlightSearch:
             "max": "2",
             "include": "AIRPORTS",
         }
-        response = requests.get(
-            url=IATA_ENDPOINT,
-            headers=headers,
-            params=query
-        )
+        response = requests.get(url=IATA_ENDPOINT, headers=headers, params=query)
         print(f"Status code {response.status_code}. Airport IATA: {response.text}")
         try:
-            code = response.json()["data"][0]['iataCode']
+            code = response.json()["data"][0]["iataCode"]
         except IndexError:
             print(f"IndexError: No airport code found for {city_name}.")
             return "N/A"
@@ -104,7 +98,14 @@ class FlightSearch:
 
         return code
 
-    def check_flights(self, origin_city_code, destination_city_code, from_time, to_time, is_direct=True):
+    def check_flights(
+        self,
+        origin_city_code,
+        destination_city_code,
+        from_time,
+        to_time,
+        is_direct=True,
+    ):
         """
         Searches for flight options between two cities on specified departure and return dates
         using the Amadeus API.
@@ -148,10 +149,12 @@ class FlightSearch:
 
         if response.status_code != 200:
             print(f"check_flights() response code: {response.status_code}")
-            print("There was a problem with the flight search.\n"
-                  "For details on status codes, check the API documentation:\n"
-                  "https://developers.amadeus.com/self-service/category/flights/api-doc/flight-offers-search/api"
-                  "-reference")
+            print(
+                "There was a problem with the flight search.\n"
+                "For details on status codes, check the API documentation:\n"
+                "https://developers.amadeus.com/self-service/category/flights/api-doc/flight-offers-search/api"
+                "-reference"
+            )
             print("Response body:", response.text)
             return None
 

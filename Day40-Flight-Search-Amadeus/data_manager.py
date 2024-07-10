@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
-class DataManager:
 
+class DataManager:
     def __init__(self):
 
         self._user = os.environ["SHEETY_USERNAME"]
@@ -34,14 +34,9 @@ class DataManager:
     # to update the Google Sheet with the IATA codes. (Do this using code).
     def update_destination_codes(self):
         for city in self.destination_data:
-            new_data = {
-                "price": {
-                    "iataCode": city["iataCode"]
-                }
-            }
+            new_data = {"price": {"iataCode": city["iataCode"]}}
             response = requests.put(
-                url=f"{self.prices_endpoint}/{city['id']}",
-                json=new_data
+                url=f"{self.prices_endpoint}/{city['id']}", json=new_data
             )
             print(response.text)
 
@@ -53,4 +48,3 @@ class DataManager:
         # Name of spreadsheet 'tab' with the customer emails should be "users".
         self.customer_data = data["users"]
         return self.customer_data
-

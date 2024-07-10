@@ -28,7 +28,7 @@ parameters = {
     "gender": GENDER,
     "weight_kg": WEIGHT_KG,
     "height_cm": HEIGHT_CM,
-    "age": AGE
+    "age": AGE,
 }
 
 response = requests.post(exercise_endpoint, json=parameters, headers=headers)
@@ -41,8 +41,7 @@ now_time = datetime.now().strftime("%X")
 
 # Sheety Project API. Check your Google sheet name and Sheety endpoint
 GOOGLE_SHEET_NAME = "workout"
-sheet_endpoint = os.environ[
-    "ENV_SHEETY_ENDPOINT"]
+sheet_endpoint = os.environ["ENV_SHEETY_ENDPOINT"]
 
 # Sheety API Call & Authentication
 for exercise in result["exercises"]:
@@ -52,7 +51,7 @@ for exercise in result["exercises"]:
             "time": now_time,
             "exercise": exercise["name"].title(),
             "duration": exercise["duration_min"],
-            "calories": exercise["nf_calories"]
+            "calories": exercise["nf_calories"],
         }
     }
 
@@ -68,7 +67,7 @@ for exercise in result["exercises"]:
         auth=(
             os.environ["ENV_SHEETY_USERNAME"],
             os.environ["ENV_SHEETY_PASSWORD"],
-        )
+        ),
     )
 
     # Sheety Authentication Option 3: Bearer Token
