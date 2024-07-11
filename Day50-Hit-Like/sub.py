@@ -7,8 +7,8 @@ from selenium.common.exceptions import (
 )
 import time
 
-EMAIL = BLA_BLA_BLA
-PASSWORD = BLA_BLA_BLA
+FB_EMAIL = YOUR FACEBOOK LOGIN EMAIL
+FB_PASSWORD = YOUR FACEBOOK PASSWORD
 
 
 # Keep Chrome browser open after program finishes
