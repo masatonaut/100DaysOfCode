@@ -4,9 +4,9 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 import time
 
-ACCOUNT_EMAIL = YOUR LOGIN EMAIL
-ACCOUNT_PASSWORD = YOUR LOGIN PASSWORD
-PHONE = YOUR PHONE NUMBER
+ACCOUNT_EMAIL = "YOUR LOGIN EMAIL"
+ACCOUNT_PASSWORD = "YOUR LOGIN PASSWORD"
+PHONE = "YOUR PHONE NUMBER"
 
 
 def abort_application():
@@ -16,7 +16,9 @@ def abort_application():
 
     time.sleep(2)
     # Click Discard Button
-    discard_button = driver.find_elements(by=By.CLASS_NAME, value="artdeco-modal__confirm-dialog-btn")[1]
+    discard_button = driver.find_elements(
+        by=By.CLASS_NAME, value="artdeco-modal__confirm-dialog-btn"
+    )[1]
     discard_button.click()
 
 
@@ -26,12 +28,16 @@ chrome_options.add_experimental_option("detach", True)
 
 driver = webdriver.Chrome(options=chrome_options)
 
-driver.get("https://www.linkedin.com/jobs/search/?currentJobId=3586148395&f_LF=f_AL&geoId=101356765&"
-           "keywords=python&location=London%2C%20England%2C%20United%20Kingdom&refresh=true")
+driver.get(
+    "https://www.linkedin.com/jobs/search/?currentJobId=3586148395&f_LF=f_AL&geoId=101356765&"
+    "keywords=python&location=London%2C%20England%2C%20United%20Kingdom&refresh=true"
+)
 
 # Click Reject Cookies Button
 time.sleep(2)
-reject_button = driver.find_element(by=By.CSS_SELECTOR, value='button[action-type="DENY"]')
+reject_button = driver.find_element(
+    by=By.CSS_SELECTOR, value='button[action-type="DENY"]'
+)
 reject_button.click()
 
 # Click Sign in Button
@@ -52,7 +58,9 @@ input("Press Enter when you have solved the Captcha")
 
 # Get Listings
 time.sleep(5)
-all_listings = driver.find_elements(by=By.CSS_SELECTOR, value=".job-card-container--clickable")
+all_listings = driver.find_elements(
+    by=By.CSS_SELECTOR, value=".job-card-container--clickable"
+)
 
 # Apply for Jobs
 for listing in all_listings:
@@ -61,7 +69,9 @@ for listing in all_listings:
     time.sleep(2)
     try:
         # Click Apply Button
-        apply_button = driver.find_element(by=By.CSS_SELECTOR, value=".jobs-s-apply button")
+        apply_button = driver.find_element(
+            by=By.CSS_SELECTOR, value=".jobs-s-apply button"
+        )
         apply_button.click()
 
         # Insert Phone Number
@@ -84,7 +94,9 @@ for listing in all_listings:
 
         time.sleep(2)
         # Click Close Button
-        close_button = driver.find_element(by=By.CLASS_NAME, value="artdeco-modal__dismiss")
+        close_button = driver.find_element(
+            by=By.CLASS_NAME, value="artdeco-modal__dismiss"
+        )
         close_button.click()
 
     except NoSuchElementException:

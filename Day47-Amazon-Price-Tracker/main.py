@@ -14,12 +14,18 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
 }
 response = requests.get(URL, headers=headers)
-soup = BeautifulSoup(response.content, 'html.parser')
+soup = BeautifulSoup(response.content, "html.parser")
 
 title = soup.find(id="productTitle").get_text().strip()
 print(title)
 
-price = soup.find(id="priceblock_ourprice").get_text().strip().replace('$', '').replace(',', '')
+price = (
+    soup.find(id="priceblock_ourprice")
+    .get_text()
+    .strip()
+    .replace("$", "")
+    .replace(",", "")
+)
 price_as_float = float(price)
 print(price_as_float)
 
